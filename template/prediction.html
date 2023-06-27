@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    body {
+      background-color: #868686;
+      font-family: Tahoma, sans-serif;
+    }
+
+    .container {
+      margin-top: 0px;
+    }
+
+    .card {
+      margin-top: 80px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      background-color: #88070c;
+      color: #fff;
+      border-radius: 8px 8px 0 0;
+      padding: 15px;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+      font-size: 24px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card-body {
+      padding: 15px;
+      background-color: #e4e2e2;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background-color: #6f6f6f;
+      border-color: #feffff;
+    }
+
+    .btn-primary:hover {
+      background-color: #4f4f4f;
+      border-color: #4f4f4f;
+    }
+
+    h4{
+      display: inline;
+      font-size: 21px;
+    }
+
+    img{
+      display: block;
+    }
+
+    .material-icons{
+      position: absolute;
+      display: inline;
+      right: 20px;
+      top: 7px;
+      font-size: 50px;
+      margin-bottom: 0;
+      color: white;
+    }
+
+    .material-icons:hover{
+      color: #4f4f4f;
+    }
+
+    .col-md-6{
+      border: 3px blue;  
+      padding: 20px 40px 40px;
+      max-width: 640px;
+      display: flex;
+      margin: auto;
+      width: 100%;
+      text-align: center;
+     
+    } 
+
+    .col-md-6__img{
+      margin: 20px 30px 0 0;
+      width: 200px;
+      object-fit: contain;
+      align-self: flex-start;
+      border: 3px blue;  
+    }
+
+    .col-md-6__txt {
+      flex: 1 1 auto;
+      left: 80px;
+      position: relative;
+      margin-top: 120px;
+    }
+    
+    #desc{
+      font-size: 13px;
+    }
+
+    #disclaimer{
+      font-size: 10px;
+    }
+
+    #img_title{
+      right: -50px;
+      position: relative;
+      font-size: 20px;
+    }
+
+    #pdf{
+      right: -50px;
+      top: 20px;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+  <title>ACL Injury Classification System - Prediction</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title text-center">Anterior Cruciate Ligament Injury Classification System</h1>
+        <a href="javascript:history.go(-1)"><i class="material-icons">arrow_back</i></a>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          
+          <div class="col-md-6">
+            <div class="col-md-6__img">
+              <h4 id="img_title">Uploaded Image</h4>
+              <img src="{{filePathName}}" alt="Predicted Image" width='300'>
+              <a href="renderPDF" target="_blank" id="pdf">
+                <button type="submit" class="btn btn-primary btn-sm">Download PDF Results</button>
+              </a>
+            </div>
+
+            <div class="col-md-6__txt">
+              <h4>Classification:</h4>
+
+              {% if predictedLabel == "Healthy" %}
+              <h4 style="color:rgb(13, 153, 3);">{{predictedLabel}}</h4>
+              <br>
+              <p id="desc">Anterior Cruciate Ligament is healthy and no tear or damage has been detected. 
+                Can provide stability to the knee joint.</p>
+              {% elif predictedLabel == "Partially Torn" %}
+              <h4 style="color:rgb(206, 107, 0);">{{predictedLabel}}</h4>
+              <br>
+              <p id="desc">Anterior Cruciate Ligament is partially torn. Ligament is stretched and became loose,
+                unlikely to provide full stability to the knee joint.
+              </p>
+              {% elif predictedLabel == "Fully Torn" %}
+              <h4 style="color:rgb(168, 0, 0);">{{predictedLabel}}</h4>
+              <br>
+              <p id="desc">Anterior Cruciate Ligament is fully torn. Ligament has split into two pieces and provides
+                no stability to the knee joint.</p>
+              {% endif %} 
+              <br>
+              <p id="disclaimer"> DISCLAIMER: Please note that the predictions provided by the system are intended for 
+                informational purposes only. Always consult medical experts for an 
+                accurate diagnosis and personalized treatment plan.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
