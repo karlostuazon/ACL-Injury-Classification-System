@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-med%z!64)@9zd-axj-@hf-w7osot6=db#te1rb#ab75n)n*2ve
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['karlostuazon.github.io/ACL_Predict/']
 
 
 # Application definition
