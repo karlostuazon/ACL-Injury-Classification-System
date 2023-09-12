@@ -1,4 +1,4 @@
-# ACL Predict - ACL Injury Classification System utilizing CNNs and MRIs
+# ACL Injury Classification System utilizing CNNs and MRIs
 
 - A web-based decision support tool for assessing and diagnosing ACL injury utilizing knee MRIs.
 - Integrated the best performing CNN model out of 144 tested models based on AUC, F1 Score, and Recall.
